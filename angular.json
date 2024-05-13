@@ -71,12 +71,17 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "blogger-box-frontend:build",
+            "proxyConfig": "src/proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "blogger-box-frontend:build:production"
             },
             "development": {
-              "buildTarget": "blogger-box-frontend:build:development"
+              "buildTarget": "blogger-box-frontend:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
