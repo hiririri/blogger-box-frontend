@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {PostListComponent} from './components/post-list/post-list.component';
 import {PostService} from "./service/PostService";
 import {PostListItemComponent} from './components/post-list-item/post-list-item.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -16,12 +17,13 @@ import {PostListItemComponent} from './components/post-list-item/post-list-item.
     PostListComponent,
     PostListItemComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
 
-    HttpClientModule
-  ],
+        HttpClientModule,
+        NgOptimizedImage
+    ],
   providers: [PostService],
   bootstrap: [AppComponent]
 })

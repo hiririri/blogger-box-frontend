@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "../../data/post";
 
 @Component({
@@ -8,4 +8,7 @@ import {Post} from "../../data/post";
 })
 export class PostListItemComponent {
   @Input() post!: Post;
+
+  constructor() {
+  }
 }
