@@ -1,7 +1,7 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {catchError, Observable, of, retry} from "rxjs";
-import {Post} from "../data/post";
+import {Post, PostCreateInput} from "../data/post";
 import {environment} from "../environments/environment";
 
 @Injectable()
@@ -32,10 +32,10 @@ export class PostService {
       );
   }
 
-  createPost(post: Post): Observable<Post> {
+  createPost(post: PostCreateInput): Observable<Post | PostCreateInput> {
     return this.http.post<Post>(this.postsUrl, post)
       .pipe(
-        catchError(this.handleError<Post>('createPost', post))
+        catchError(this.handleError<PostCreateInput>('createPost', post))
       );
   }
 

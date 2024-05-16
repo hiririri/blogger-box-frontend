@@ -9,22 +9,30 @@ import {PostListComponent} from './components/post-list/post-list.component';
 import {PostService} from "./service/PostService";
 import {PostListItemComponent} from './components/post-list-item/post-list-item.component';
 import {NgOptimizedImage} from "@angular/common";
+import {PostFormComponent} from './components/post-form/post-form.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {CategoryService} from "./service/CategoryService";
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     PostListComponent,
-    PostListItemComponent
+    PostListItemComponent,
+    PostFormComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
 
-        HttpClientModule,
-        NgOptimizedImage
-    ],
-  providers: [PostService],
+    HttpClientModule,
+    NgOptimizedImage,
+    ReactiveFormsModule
+  ],
+  providers: [
+    PostService,
+    CategoryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
