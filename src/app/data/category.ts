@@ -3,4 +3,6 @@ export interface Category {
   name: string;
 }
 
-export type CategoryCreateInputWithIsActive = Omit<Category, 'id'> & { isActive: boolean };
+export type CategoryCreateInputWithIsActive = Omit<Category, 'id'> & {
+  isActive: boolean;
+};

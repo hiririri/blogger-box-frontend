@@ -9,6 +9,7 @@
         class="form-control"
         id="title"
         formControlName="title"
+        placeholder="Enter the title of your blog post"
         [class.is-invalid]="title.invalid && title.touched"
         [class.is-valid]="title.valid && title.touched"
       >
@@ -24,7 +25,8 @@
     <div class="mb-3">
       <label for="category" class="form-label">Category</label>
       <select
-        class="form-select" id="category"
+        class="form-select"
+        id="category"
         formControlName="category"
         [class.is-invalid]="category.invalid && category.touched"
         [class.is-valid]="category.valid && category.touched"
@@ -42,8 +44,11 @@
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
       <textarea
-        class="form-control" id="content"
+        class="form-control"
+        id="content"
         formControlName="content"
+        placeholder="Write your blog post here..."
+        [rows]="5"
         [class.is-invalid]="content.invalid && content.touched"
         [class.is-valid]="content.valid && content.touched"
       ></textarea>
@@ -54,10 +59,12 @@
       </div>
     </div>
 
+    <!-- Cancel button -->
     <div class="d-flex justify-content-end gap-3">
       <button
         type="button"
         class="btn btn-outline-danger"
+        (click)="onCancel()"
       >
         Cancel
       </button>
@@ -65,10 +72,9 @@
       <!-- Submit button -->
       <button
         type="submit"
-        class="btn btn-primary"
-        [disabled]="postForm.invalid"
+        class="btn btn-success"
       >
-        Submit
+        Post message
       </button>
     </div>
 
