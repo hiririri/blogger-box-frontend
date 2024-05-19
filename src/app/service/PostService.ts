@@ -1,56 +1,49 @@
-import {HttpClient} from "@angular/common/http";
-import {Injectable} from "@angular/core";
-import {catchError, Observable, of, retry} from "rxjs";
-import {Post} from "../data/post";
-import {environment} from "../../environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { catchError, Observable, of } from 'rxjs';
+import { Post, PostCreateInput } from '../data/post';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class PostService {
-  private postsUrl: string = `${environment.apiUrl}v1/posts/`
+  private postsUrl: string = `${environment.apiUrl}v1/posts/`;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.postsUrl)
-      .pipe(
-        catchError(this.handleError<Post[]>('getPosts', []))
-      );
+    return this.http
+      .get<Post[]>(this.postsUrl)
+      .pipe(catchError(this.handleError<Post[]>('getPosts', [])));
   }
 
   getPostById(id: string): Observable<Post> {
-    return this.http.get<Post>(`${this.postsUrl}/post/${id}`)
-      .pipe(
-        catchError(this.handleError<Post>('getPostById', undefined))
-      );
+    return this.http
+      .get<Post>(`${this.postsUrl}/post/${id}`)
+      .pipe(catchError(this.handleError<Post>('getPostById', undefined)));
   }
 
   getPostsByCategoryId(categoryId: string): Observable<Post[]> {
-    return this.http.get<Post[]>(`${this.postsUrl}/category/${categoryId}`)
-      .pipe(
-        catchError(this.handleError<Post[]>('getPostsByCategoryId', []))
-      );
+    return this.http
+      .get<Post[]>(`${this.postsUrl}/category/${categoryId}`)
+      .pipe(catchError(this.handleError<Post[]>('getPostsByCategoryId', [])));
   }
 
-  createPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(this.postsUrl, post)
-      .pipe(
-        catchError(this.handleError<Post>('createPost', post))
-      );
+  createPost(post: PostCreateInput): Observable<Post | PostCreateInput> {
+    return this.http
+      .post<Post>(this.postsUrl, post)
+      .pipe(catchError(this.handleError<PostCreateInput>('createPost', post)));
   }
 
   updatePost(post: Post): Observable<Post> {
-    return this.http.put<Post>(this.postsUrl, post)
-      .pipe(
-        catchError(this.handleError<Post>('updatePost', post))
-      );
+    return this.http
+      .put<Post>(this.postsUrl, post)
+      .pipe(catchError(this.handleError<Post>('updatePost', post)));
   }
 
   deletePost(id: string): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.postsUrl}/post/${id}`)
-      .pipe(
-        catchError(this.handleError<boolean>('deletePost', false))
-      );
+    return this.http
+      .delete<boolean>(`${this.postsUrl}/post/${id}`)
+      .pipe(catchError(this.handleError<boolean>('deletePost', false)));
   }
 
   protected handleError<T>(operation = 'operation', result?: T) {

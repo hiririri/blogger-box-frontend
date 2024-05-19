@@ -1,4 +1,4 @@
-import {Category} from "./category";
+import { Category } from './category';
 
 export interface Post {
   id: string;
@@ -7,3 +7,7 @@ export interface Post {
   createdDate: Date;
   category: Category;
 }
+
+export type PostCreateInput = Omit<Post, 'id' | 'createdDate' | 'category'> & {
+  categoryId: string;
+};
