@@ -1,0 +1,7 @@
+<h1>Welcome to Our Site</h1>
+<p>This is some public content that everyone can see.</p>
+
+@if (isAuthenticated()) {
+  <h1>Hi, {{ username }}</h1>
+  <p>This is some content that only logged in users can see.</p>
+}
