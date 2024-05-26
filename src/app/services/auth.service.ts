@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -55,5 +55,32 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  loginWithGoogle(url: string) {
+    window.location.href = url;
+    this.router.navigate(['/']).then(() => {});
+  }
+
+  loginWithGoogleCallback(code: string) {
+    return this.http
+      .get<LoginResponse>(
+        'http://localhost:8080/api/v1/oauth/google/callback?code=' + code,
+        {
+          observe: 'response',
+        },
+      )
+      .subscribe((response: HttpResponse<LoginResponse>) => {
+        if (response.status === 200 && response.body !== null) {
+          console.log(response.body);
+          localStorage.setItem('token', response.body.token);
+          localStorage.setItem('username', response.body.username);
+          window.location.href = '/'; // Redirect to home page will refresh the page
+        }
+      });
+  }
+
+  getGoogleUrl() {
+    return this.http.get('http://localhost:8080/api/v1/oauth/google/url');
   }
 }
