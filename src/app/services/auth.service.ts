@@ -72,7 +72,6 @@ export class AuthService {
       )
       .subscribe((response: HttpResponse<LoginResponse>) => {
         if (response.status === 200 && response.body !== null) {
-          console.log(response.body);
           localStorage.setItem('token', response.body.token);
           localStorage.setItem('username', response.body.username);
           window.location.href = '/'; // Redirect to home page will refresh the page
