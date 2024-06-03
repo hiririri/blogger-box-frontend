@@ -13,12 +13,8 @@ export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.postService.getPosts().subscribe(posts => {
-      this.posts = posts.map(post => {
-        let dateParts = post.createdDate.toString().split(',').map(part => parseInt(part, 10));
-        post.createdDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], dateParts[3], dateParts[4], dateParts[5]);
-        return post;
-      });
+    this.postService.getPosts().subscribe((posts) => {
+      this.posts = posts;
     });
   }
 }
